@@ -15,6 +15,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URI
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         db.collection("users").document(email.toString())
                 .set(data)
                 .addOnSuccessListener { documentReference ->
-                    Log.d("success","DocumentSnapshot written with ID: ${email.toString()}")
+                    Log.d("success", "DocumentSnapshot written with ID: ${email.toString()}")
                 }
                 .addOnFailureListener { e ->
                     Log.w("Error adding document", e)
@@ -50,13 +55,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpDataBinding(){
         binding = DataBindingUtil.setContentView(
-            this, R.layout.activity_main)
+                this, R.layout.activity_main)
     }
 
     private fun setUpNavigation(){
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
-        setupActionBarWithNavController(this,navController)
+        setupActionBarWithNavController(this, navController)
         NavigationUI.setupWithNavController(bottom_nav, navController)
 
     }
